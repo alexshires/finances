@@ -60,7 +60,7 @@ import matplotlib.pyplot as plt
     
 def plot(incdf, outdf, scenario=0):
     df2 = outdf[ outdf.Scenario == scenario]
-    print df2
+    #print df2
     with PdfPages("testplots.pdf") as pdf:
         x = df2.index
         y = df2.Cost
@@ -81,12 +81,17 @@ def process_file(costfilename, incfilename):
     #print costdata
     #print incdata
     #calculate cumulative values
+    #generate weekly series
+    from pandas import date_range
+    rng = date_range('26/4/15', periods=30, freq='W')
+    for i in rng:
+        print i
     #TOSO - diff freqeuncy versions
     #costdata["cumul"] = costdata.Cost.cumsum()
     #calculate balance as a function of time
     #find number of scenarios
     #plot income, costs, balance for each
-    ax = plot(incdata, costdata, 0)
+    #ax = plot(incdata, costdata, 0)
 
     return
 
