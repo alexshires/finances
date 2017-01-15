@@ -24,7 +24,10 @@ def read_banking_csv(_filename):
     """
     df = pd.read_csv(os.path.join(datadir, _filename), sep=',')
     df.columns = [col.replace(" ", "_") for col in df.columns]
-    df["DateTime"] = pd.to_datetime(df["Transaction_Date"], format="%d/%m/%Y")
+    if "Transaction_Date" in df.columns:
+        df["DateTime"] = pd.to_datetime(df["Transaction_Date"], format="%d/%m/%Y")
+    else:
+        df["DateTime"] = pd.to_datetime(df["Date"], format="%d/%m/%Y")
     return df
 
 
@@ -52,6 +55,29 @@ def define_cats(x):
     """
 
 
+
+def predict_payoff(debitdf, creditdf):
+    """
+    Predict payoff of credit card
+    :param debitdf:
+    :param creditdf:
+    :return:
+    """
+
+
+
+def plot_banking_information(debitdf, creditdf, mindate="20161201", maxdate="20170131"):
+    """
+    Display recent banking information
+    :param debitdf: dataframe of debit trasactions
+    :param creditdf: dataframe of credit transactions
+    :param mindate: min date (dec 2016)
+    :param maxdate: max date (jan 2017)
+    :return: plots
+    """
+    pass
+
+
     
 if __name__ == '__main__':
     import time
@@ -70,6 +96,7 @@ if __name__ == '__main__':
     totdf.Balance.plot()
     plt.savefig("latest.png")
 
+    credf = pd.concat( [read_banking_csv(csv_file) for csv_file in credit_csv_files], axis=0)
 
 
     ipdb.set_trace()
