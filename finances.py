@@ -27,6 +27,31 @@ def read_banking_csv(_filename):
     df["DateTime"] = pd.to_datetime(df["Transaction_Date"], format="%d/%m/%Y")
     return df
 
+
+class SpendingCategory(object):
+    """
+    Class to define spending category
+    Is this really a key-value map?
+    """
+    def __init__(self, name):
+        """
+        Config spending category
+        :param name: category name
+        """
+        self.name = name
+        self.shops = list()
+
+
+
+def define_cats(x):
+    """
+    function to manually define category of spending
+    TODO: replace with machine learning - company information?
+    :param x: input transaction information
+    :return: category of travel
+    """
+
+
     
 if __name__ == '__main__':
     import time
